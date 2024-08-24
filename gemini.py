@@ -14,9 +14,9 @@ st.write("Ask anything and the ASA chatbot will respond!")
 user_input = st.text_input("You:", "")
 
 if user_input:
-    # Make a request to the Gemini API
+    # Make a request to the OpenAI API using the latest API syntax
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-3.5-turbo",  # or use the model appropriate for your API key
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": user_input},
@@ -24,7 +24,7 @@ if user_input:
     )
 
     # Extract the chatbot's reply
-    bot_reply = response.choices[0].message['content']
+    bot_reply = response['choices'][0]['message']['content']
 
     # Display the reply
     st.text_area("ASA:", value=bot_reply, height=200)
